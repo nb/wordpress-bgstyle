@@ -2,7 +2,7 @@
 /*
 Plugin Name: По български
 Plugin URI: http://wordpress.org/extend/plugins/bgstyle/
-Description: Помага за по-лесно и приятно писане на публикации на български.
+Description: Помага за по-доброто оформление за публикации на български език
 Author: Николай Бачийски
 Version: 0.1
 Author URI: http://nb.niichavo.org/
@@ -38,7 +38,6 @@ class bg_style
 ?>
 	<style type="text/css">
 		q:before, q:after { content: '';}
-		q {font-style: italic;}
 	</style>
 <?php
 	}
