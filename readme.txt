@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: nbachiyski
-Tags: posts, style, typograhy, formatting
+Tags: posts, style, typography, formatting
 Requires at least: 2.1
 Tested up to: 2.4
 Stable tag: trunk
