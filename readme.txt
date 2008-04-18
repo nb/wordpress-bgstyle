@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== По български ===
 Contributors: nbachiyski
 Tags: posts, style, typography, formatting
 Requires at least: 2.1
@@ -13,7 +13,7 @@ Stable tag: trunk
 
 Засега по следните начини:
 
-* заменя английските кавички с български: &#8222; и &#8220;
+* заменя английските кавички с български: &#8222; и &#8220; (благодарение на [finquote](http://kimmo.suominen.com/sw/finquote/))
 * слага автоматично български кавички на текст в &lt;q&gt; таг
 * заменя самотна малка буква <em>й</em> с &#1117; (ударена малка буква <em>и</em>)
 

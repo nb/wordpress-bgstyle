@@ -4,7 +4,7 @@ Plugin Name: По български
 Plugin URI: http://wordpress.org/extend/plugins/bgstyle/
 Description: Помага за по-доброто оформление за публикации на български език
 Author: Николай Бачийски
-Version: 0.1
+Version: 0.02
 Author URI: http://nb.niichavo.org/
 */
 
@@ -76,7 +76,8 @@ class bg_style
 		}
 		$output = str_replace('<q>', '&#8222;<q>', $output);
 		$output = str_replace('</q>', '</q>&#8220;', $output);
-		$output = str_replace(' й ', ' &#1117; ', $output);
+		$output = str_replace(' - ', '&mdash;', $output);
+		$output = preg_replace('/(\s+)й(\s+|\.|!|\?|,|<|&)/u', '\1&#1117;\2', $output);
 		return $output;
     }
 }
