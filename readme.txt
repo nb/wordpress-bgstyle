@@ -2,7 +2,7 @@
 Contributors: nbachiyski
 Tags: posts, style, typography, formatting
 Requires at least: 2.1
-Tested up to: 2.5
+Tested up to: 2.7.1
 Stable tag: trunk
 
 Помага за по-доброто оформление за публикации на български език
