@@ -1,8 +1,8 @@
 === По български ===
 Contributors: nbachiyski
-Tags: posts, style, typography, formatting
+Tags: posts, style, typography, formatting, Bulgarian, български, quotes, кавички, ударено и, и кратко
 Requires at least: 2.1
-Tested up to: 2.7.1
+Tested up to: 2.9
 Stable tag: trunk
 
 Помага за по-доброто оформление за публикации на български език
@@ -15,9 +15,10 @@ Stable tag: trunk
 
 * заменя английските кавички с български: &#8222; и &#8220; (благодарение на [finquote](http://kimmo.suominen.com/sw/finquote/))
 * слага автоматично български кавички на текст в &lt;q&gt; таг
-* заменя самотна малка буква <em>й</em> с &#1117; (ударена малка буква <em>и</em>)
+* заменя самотна малка буква <em>й</em> с &#1117; (ударена малка буква <em>и</em>, и кратко)
+* заменя много дългото тире, използвано в английския език (mdash) с дългото тире, използвано в българския (ndash)
 
 == Installation ==
 
-1. Качете файла `bgstyle.php` в `/wp-content/plugins/` на вашия сървър
+1. Качете директорията `bgstyle` в `/wp-content/plugins/` на вашия сървър
 1. Включете разширението от менюто 'Разширения' (Plugins)
