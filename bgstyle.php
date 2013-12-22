@@ -64,9 +64,6 @@ class BG_Style {
 
 	/*
 	 Goes after wptexturize and changes the quotes to match the Bulgarian style
-
-	 Most of the code of this function is taken from Kimmo Suominen's 'Finnish Quotes' plugin
-	 and can be found here: http://kimmo.suominen.com/sw/finquote/finquote.php
 	*/
     function bgtexturize( $text ) {
 		$text = str_replace( '<q>', '&#8222;<q>', $text );
