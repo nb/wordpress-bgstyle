@@ -18,8 +18,13 @@ class BG_Style {
 	);
 
     function __construct() {
+		$this->add_bgtexturize_after_wptexturize();
+		add_filter( 'wp_head', array( &$this, 'no_quotes_around_q' ) );
+		add_filter( 'gettext_with_context', array( $this, 'force_bulgarian_quotes' ), 10, 4 );
+    }
+
+	function add_bgtexturize_after_wptexturize() {
 		global $wp_filter;
-		// go through all filters and add our style-fixer after wptexturize
 		foreach ( $wp_filter as $tag => $filter ) {
 			$found_wptxt = 0;
 			foreach ( $wp_filter[$tag] as $priority => $functions ) {
@@ -37,10 +42,7 @@ class BG_Style {
 				continue;
 			}
 		}
-		// tell the browsers not to show quotes around <q> tags
-		add_filter( 'wp_head', array( &$this, 'no_quotes_around_q' ) );
-		add_filter( 'gettext_with_context', array( $this, 'force_bulgarian_quotes' ), 10, 4 );
-    }
+	}
 
 	function no_quotes_around_q() {
 ?>
