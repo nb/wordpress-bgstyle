@@ -10,7 +10,15 @@ Author URI: http://nikolay.bg/
 
 class BG_Style
 {
-    function bg_style()
+
+	public $quotes_translations = array(
+		array( '&#8220;', 'opening curly quote', '&#8222;' ),
+		array( '&#8220;', 'opening curly double quote', '&#8222;' ),
+		array( '&#8221;', 'closing curly quote', '&#8220;' ),
+		array( '&#8221;', 'closing curly double quote', '&#8220;' ),
+	);
+
+    function __construct()
     {
 		global $wp_filter;
 		// go through all filters and add our style-fixer after wptexturize
@@ -33,6 +41,7 @@ class BG_Style
 		}
 		// tell the browsers not to show quotes around <q> tags
 		add_filter( 'wp_head', array( &$this, 'no_quotes_around_q' ) );
+		add_filter( 'gettext_with_context', array( $this, 'force_bulgarian_quotes' ), 10, 4 );
     }
 
 	function no_quotes_around_q() {
@@ -43,13 +52,14 @@ class BG_Style
 <?php
 	}
 
-	function curly_quotes_are_translated() {
-		if ( !function_exists( 'translate_with_gettext_context' ) ) {
-			return false;
+	function force_bulgarian_quotes( $translation, $text, $context, $domain ) {
+		foreach( $this->quotes_translations as $item ) {
+			list( $english_quote, $quote_context, $bulgarian_quote) = $item;
+			if ( $english_quote === $translation && $quote_context === $context ) {
+				return $bulgarian_quote;
+			}
 		}
-		$translatable_before_3_4 = '&#8220;' != translate_with_gettext_context( '&#8220;', 'opening curly quote' );
-		$translatable_after_3_4 = '&#8220;' != translate_with_gettext_context( '&#8220;', 'opening curly double quote' );
-		return $translatable_before_3_4 || $translatable_after_3_4;
+		return $translation;
 	}
 
 
@@ -60,46 +70,15 @@ class BG_Style
 	 and can be found here: http://kimmo.suominen.com/sw/finquote/finquote.php
 	*/
     function bgtexturize( $text ) {
-		$output = '';
-
-		// Capture tags and everything inside them
-		$tarr = preg_split( '/(<.*>)/Us', $text, -1, PREG_SPLIT_DELIM_CAPTURE );
-
-		$wp_can_has_quotes = $this->curly_quotes_are_translated();
-
-		// loop stuff
-		if ( $wp_can_has_quotes ) {
-			$output = $text;
-		} else {
-			$stop = count( $tarr );
-			$next = true;
-			for ( $i = 0; $i < $stop; $i++ ) {
-				$curl = $tarr[$i];
-				if ( isset( $curl{0} ) && '<' != $curl{0} && $next ) {
-					// wptexturize uses the combination: &#8220; some text &#8221;
-					// the Bulgarian style quotes are: &#8222; the same text &#8220;
-					$curl = str_replace( '&#8220;', '&#8222;', $curl );
-					$curl = str_replace( '&#8221;', '&#8220;', $curl );
-				} elseif ( strstr( $curl, '<code' ) || strstr( $curl, '<pre' )
-						|| strstr( $curl, '<kbd' || strstr( $curl, '<style' )
-						|| strstr( $curl, '<script' ) ) ) {
-					// strstr is fast
-					$next = false;
-				} else {
-					$next = true;
-				}
-				$output .= $curl;
-			}
-		}
-		$output = str_replace( '<q>', '&#8222;<q>', $output );
-		$output = str_replace( '</q>', '</q>&#8220;', $output );
-		$output = str_replace( ' - ', '&ndash;', $output );
+		$text = str_replace( '<q>', '&#8222;<q>', $text );
+		$text = str_replace( '</q>', '</q>&#8220;', $text );
+		$text = str_replace( ' - ', '&ndash;', $text );
 		// ndash is more typrographically correct in Bulgarian
-		$output = str_replace( '&mdash;', '&ndash;', $output );
-		$output = str_replace( '&mdash;', '&ndash;', $output );
-		$output = str_replace( '&#8212;', '&#8211;', $output );
-		$output = preg_replace( '/(\s+)й(\s+|\.|!|\?|,|<|&|;|:)/u', '\1&#1117;\2', $output );
-		return $output;
+		$text = str_replace( '&mdash;', '&ndash;', $text );
+		$text = str_replace( '&mdash;', '&ndash;', $text );
+		$text = str_replace( '&#8212;', '&#8211;', $text );
+		$text = preg_replace( '/(\s+)й(\s+|\.|!|\?|,|<|&|;|:)/u', '\1&#1117;\2', $text );
+		return $text;
     }
 }
 
