@@ -1,8 +1,8 @@
 === По български ===
 Contributors: nbachiyski
 Tags: posts, style, typography, formatting, Bulgarian, български, quotes, кавички, ударено и, и кратко
-Requires at least: 2.1
-Tested up to: 2.9
+Requires at least: 3.0
+Tested up to: 3.9
 Stable tag: trunk
 
 Помага за по-доброто оформление за публикации на български език
@@ -24,6 +24,12 @@ Stable tag: trunk
 1. Включете разширението от менюто 'Разширения' (Plugins)
 
 == Changelog ==
+
+= 0.9 =
+
+* Поправя проблем, при който във версия 3.8 текстът се огражда от две отварящи долни кавички
+* Премахва обратна съвместимост с ранни версии на WordPress (преди 3.0)
+* Освежен код
 
 = 0.04 =
 
