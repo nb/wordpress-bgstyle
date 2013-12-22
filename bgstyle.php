@@ -43,6 +43,15 @@ class BG_Style
 <?php
 	}
 
+	function curly_quotes_are_translated() {
+		if ( !function_exists( 'translate_with_gettext_context' ) ) {
+			return false;
+		}
+		$translatable_before_3_4 = '&#8220;' != translate_with_gettext_context( '&#8220;', 'opening curly quote' );
+		$translatable_after_3_4 = '&#8220;' != translate_with_gettext_context( '&#8220;', 'opening curly double quote' );
+		return $translatable_before_3_4 || $translatable_after_3_4;
+	}
+
 
 	/*
 	 Goes after wptexturize and changes the quotes to match the Bulgarian style
@@ -56,7 +65,7 @@ class BG_Style
 		// Capture tags and everything inside them
 		$tarr = preg_split( '/(<.*>)/Us', $text, -1, PREG_SPLIT_DELIM_CAPTURE );
 
-		$wp_can_has_quotes = ( function_exists( '_x' ) && '&#8220;' != _x( '&#8220;', 'opening curly quote' ) );
+		$wp_can_has_quotes = $this->curly_quotes_are_translated();
 
 		// loop stuff
 		if ( $wp_can_has_quotes ) {
