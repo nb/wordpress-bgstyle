@@ -8,8 +8,7 @@ Version: 0.04
 Author URI: http://nikolay.bg/
 */
 
-class BG_Style
-{
+class BG_Style {
 
 	public $quotes_translations = array(
 		array( '&#8220;', 'opening curly quote', '&#8222;' ),
@@ -18,8 +17,7 @@ class BG_Style
 		array( '&#8221;', 'closing curly double quote', '&#8220;' ),
 	);
 
-    function __construct()
-    {
+    function __construct() {
 		global $wp_filter;
 		// go through all filters and add our style-fixer after wptexturize
 		foreach ( $wp_filter as $tag => $filter ) {
@@ -61,7 +59,6 @@ class BG_Style
 		}
 		return $translation;
 	}
-
 
 	/*
 	 Goes after wptexturize and changes the quotes to match the Bulgarian style
