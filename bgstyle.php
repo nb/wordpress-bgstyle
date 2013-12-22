@@ -19,7 +19,7 @@ class BG_Style {
 
     function __construct() {
 		$this->add_bgtexturize_after_wptexturize();
-		add_filter( 'wp_head', array( &$this, 'no_quotes_around_q' ) );
+		add_filter( 'wp_head', array( $this, 'no_quotes_around_q' ) );
 		add_filter( 'gettext_with_context', array( $this, 'force_bulgarian_quotes' ), 10, 4 );
     }
 
@@ -31,7 +31,7 @@ class BG_Style {
 				if ( !is_null( $functions ) ) {
 					foreach ( $functions as $function ) {
 						if ( 'wptexturize' == $function['function'] ) {
-							add_filter( $tag, array( &$this, 'bgtexturize' ), $priority + 1 );
+							add_filter( $tag, array( $this, 'bgtexturize' ), $priority + 1 );
 							$found_wptxt = 1;
 							break;
 						}
