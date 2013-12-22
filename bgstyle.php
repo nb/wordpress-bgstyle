@@ -45,18 +45,18 @@ class bg_style
 
 	/*
 	 Goes after wptexturize and changes the quotes to match the Bulgarian style
-	
+
 	 Most of the code of this function is taken from Kimmo Suominen's 'Finnish Quotes' plugin
 	 and can be found here: http://kimmo.suominen.com/sw/finquote/finquote.php
 	*/
     function bgtexturize($text) {
 		$output = '';
-				
+
 		// Capture tags and everything inside them
 		$tarr = preg_split("/(<.*>)/Us", $text, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 		$wp_can_has_quotes = ( function_exists('_x') && '&#8220;' != _x('&#8220;', 'opening curly quote') );
-	
+
 		// loop stuff
 		if ( $wp_can_has_quotes ) {
 			$output = $text;
